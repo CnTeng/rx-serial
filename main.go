@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/CnTeng/rx-serial/internal/cmd"
+	"github.com/CnTeng/rx-serial/cmd"
 )
 
 func main() {
