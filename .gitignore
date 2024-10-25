@@ -1,0 +1,4 @@
+.direnv
+test/**
+
+.pre-commit-config.yaml
