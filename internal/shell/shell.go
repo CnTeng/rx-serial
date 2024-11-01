@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/CnTeng/rx-serial/internal/data"
 	"github.com/CnTeng/rx-serial/internal/message"
+	"github.com/CnTeng/rx-serial/internal/protocol"
 	"go.bug.st/serial"
 )
 
@@ -81,7 +81,7 @@ func sendFile(reader *bufio.Reader, port serial.Port, fileName string) {
 func readPort(port serial.Port) {
 	time.Sleep(time.Millisecond * 200)
 
-	c, err := data.NewConfig("test/config.json", "test/structs")
+	c, err := protocol.NewProtocol("test/structs")
 	if err != nil {
 		fmt.Println("Error reading config file:", err)
 		return
@@ -105,13 +105,12 @@ func readPort(port serial.Port) {
 	}
 	fmt.Print("\n")
 
-	d, err := c.Parse(buf)
-	if err != nil {
+	if err := c.Parse(buf); err != nil {
 		fmt.Println("Error parsing message:", err)
 		return
 	}
 
-	fmt.Println(d)
+	// fmt.Println(d)
 }
 
 func RawShell(port serial.Port) {
